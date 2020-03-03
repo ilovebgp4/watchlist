@@ -47,6 +47,25 @@ def index():
     user = User.query.first()  
     movies = Movie.query.all() 
     return render_template('index.html',user=user,movies=movies)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    user = User.query.first()
+    return render_template('404.html', user=user),404
+
 @app.route('/user/<name>')
 def user_page(name):
     return 'User: %s' % escape(name)
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
+@app.route('/test2')
+def test2():
+    return render_template('test2.html')
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
+
